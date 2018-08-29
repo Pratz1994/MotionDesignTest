@@ -2,157 +2,256 @@ import React from "react";
 import ProfileTableList from "./ProfileTableList";
 
 export default class ProfilePage extends React.Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      firstName: "",
-      lastName: "",
-      gender: "",
-      over18: "",
-      profiles: [],
-      editRow: ""
-    };
-  }
+        this.state = {
+            suburb: "",
+            material: "",
+            colour: "",
+            room: "",
+            length: "",
+            width: "",
+            pleats: "",
+            styles: "",
+            notes: "",
+            portal: [],
 
-  onChangeHandle = event => {
-    // const target = event.target;
-    const value =
-      event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
-    const name = event.target.name;
-
-    this.setState({
-      [name]: value
-    });
-  };
-
-  formSubmit = () => {
-    let newId;
-
-    if (this.state.profiles.length != 0) {
-      newId = this.state.profiles[this.state.profiles.length - 1].id + 1;
-    } else {
-      newId = 1;
+        };
     }
 
-    var newObj = {
-      id: newId,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      gender: this.state.gender,
-      over18: this.state.over18
+    onChangeHandle = event => {
+        // const target = event.target;
+        const value = event.target.value;
+        const name = event.target.name;
+
+        this.setState({
+            [name]: value
+        });
     };
 
-    let newProfiles = this.state.profiles;
+    formSubmit = () => {
+        let newId;
 
-    newProfiles.push(newObj);
+        if (this.state.portal.length != 0) {
+            newId = this.state.portal[this.state.portal.length - 1].id + 1;
+        } else {
+            newId = 1;
+        }
 
 
-    this.setState({
-      id: "",
-      firstName: "",
-      lastName: "",
-      gender: "",
-      over18: "",
-      profiles: newProfiles
-    });
-  };
+        var newObj = {
+            id: newId,
+            suburb: this.state.suburb,
+            material: this.state.material,
+            colour: this.state.colour,
+            room: this.state.room,
+            length: this.state.length,
+            width: this.state.width,
+            pleats: this.state.pleats,
+            styles: this.state.styles,
+            notes: this.state.notes,
+        };
 
-  deleteRecord = index => {
+        let newPortal = this.state.portal;
 
-    let newProfiles = this.state.profiles;
+        newPortal.push(newObj);
+        //newProfiles
 
-    newProfiles.splice(index, 1);
 
-    this.setState({
-      profiles: newProfiles
-    });
-  };
+        this.setState({
+            id: "",
+            suburb: "",
+            material: "",
+            colour: "",
+            room: "",
+            length: "",
+            width: "",
+            pleats: "",
+            styles: "",
+            notes: "",
+            portal: newPortal,
+        });
+    };
 
-  updateRecord = (index, firstName, lastName, gender, over18) => {
-    this.state.profiles[index].firstName = firstName;
-    this.state.profiles[index].lastName = lastName;
-    this.state.profiles[index].gender = gender;
-    this.state.profiles[index].over18 = over18;
+    deleteRecord = index => {
 
-    this.setState({
-      profiles: this.state.profiles
-    });
-  };
+        let newPortal = this.state.portal;
 
-  render() {
-    let displayOver18 = "No";
+        newPortal.splice(index, 1);
 
-    if (this.state.over18 === true) {
-      displayOver18 = "Yes";
-    } else {
-      displayOver18 = "No";
+        this.setState({
+            portal: newPortal
+        });
+    };
+
+    updateRecord = (index, suburb, material, colour, room, length, width, pleats, styles, notes) => {
+        this.state.portal[index].suburb = suburb;
+        this.state.portal[index].material = material;
+        this.state.portal[index].colour = colour;
+        this.state.portal[index].room = room;
+        this.state.portal[index].length = length;
+        this.state.portal[index].width = width;
+        this.state.portal[index].pleats = pleats;
+        this.state.portal[index].styles = styles;
+        this.state.portal[index].notes = notes;
+       
+        this.setState({
+            portal: this.state.portal
+        });
+    };
+
+    render() {
+    
+        
+        return (
+            <div >
+                <h1>Logo</h1>
+                    <br/>
+                <h2>Product View</h2>
+                <div className="row">
+                <div className="col-md-4">
+                            <select
+                                className="form-control"
+                                name="suburb"
+                                value={this.state.suburb}
+                                onChange={this.onChangeHandle}
+                            >
+                                <option value="">Please Select suburb</option>
+                                <option value="Auckland">Auckland</option>
+                                <option value="Silverdaile">Silverdaile</option>
+                                <option value="Rotorua">Rotorua</option>
+                            </select>
+                        </div>
+                            <div className="col-md-4">
+                            <select
+                                className="form-control"
+                                name="material"
+                                value={this.state.material}
+                                onChange={this.onChangeHandle}
+                            >
+                                <option value="">Please Select Material</option>
+                                <option value="Cotten">Cotten</option>
+                                <option value="Silk">Silk</option>
+                                <option value="Lace">Lace</option>
+                            </select>
+                        </div>
+                <div className="col-md-4">
+                            <select
+                                className="form-control"
+                                name="colour"
+                                value={this.state.colour}
+                                onChange={this.onChangeHandle}>
+                                <option value="">Please Select colour</option>
+                                <option value="Red">Red</option>
+                                <option value="Green">Green</option>
+                                <option value="Blue">Blue</option>
+                            </select>
+                    </div>
+                </div>
+                    
+                <br />
+
+                <h3>Curtains:</h3>
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Room</th>
+                            <th>Length</th>
+                            <th>Width</th>
+                            <th>Pleats</th>
+                            <th>Styles</th>
+                            <th>Notes</th>
+                        </tr>
+
+                        <tr>
+
+                            <td className="form-group">
+                                <select
+                                    className="form-control"
+                                    name="room"
+                                    value={this.state.room}
+                                    onChange={this.onChangeHandle}
+                                >
+                                    <option value="">Please Select room</option>
+                                    <option value="Living room">Living room </option>
+                                    <option value="Bed room">Bed room </option>
+                                    <option value="Bed room">Bed room </option>
+                                </select>
+                            </td>
+                            <td className="form-group">
+                                <input
+                                    className="form-control"
+                                    name="length"
+                                    value={this.state.length}
+                                    onChange={this.onChangeHandle}
+                                />
+
+                            </td>
+
+                            <td className="form-group">
+                                <input
+                                    className="form-control"
+                                    name="width"
+                                    value={this.state.width}
+                                    onChange={this.onChangeHandle}
+                                />
+
+                            </td>
+
+                            <td className="form-group">
+                                <select
+                                    className="form-control"
+                                    name="pleats"
+                                    value={this.state.pleats}
+                                    onChange={this.onChangeHandle}
+                                >
+                                    <option value="">Please Select Pleats</option>
+                                    <option value="Pencil pleats">Pencil pleats</option>
+                                    <option value="single">Single</option>
+                                    <option value="Double">Double</option>
+                                </select>
+                            </td>
+
+                            <td className="form-group">
+                                <select
+                                    className="form-control"
+                                    name="styles"
+                                    value={this.state.styles}
+                                    onChange={this.onChangeHandle}
+                                >
+                                    <option value="">Styles</option>
+                                    <option value="Curtain/Blind">Curtain/Blind</option>
+                                    <option value="Ripple Fold">Ripple Fold</option>
+                                    <option value="Sheer Curtains">Sheer Curtains</option>
+                                </select>
+                            </td>
+
+                            <td className="form-group">
+                                <input
+                                    className="form-control"
+                                    name="notes"
+                                    value={this.state.notes}
+                                    onChange={this.onChangeHandle} />
+                            </td>
+
+                        </tr>
+                    </thead>
+
+                </table>
+                <button className="btn btn-primary btn-block" onClick={this.formSubmit}>
+                    {" "}
+                    ADD{" "}
+                </button>
+                <br />
+                <br/>
+                <h2>Display Details</h2>
+                <ProfileTableList
+                    portal={this.state.portal}
+                    deleteRecord={this.deleteRecord}
+                    updateRecord={this.updateRecord}
+                />
+            </div>
+        );
     }
-
-    return (
-      <div className="form-horizontal">
-        <div className="form-group">
-          <label>First Name</label>
-          <input
-            className="form-control"
-            type="text"
-            name="firstName"
-            value={this.state.firstName}
-            onChange={this.onChangeHandle}
-          />
-        </div>
-        <div className="form-group">
-          <label>Last Name</label>
-          <input
-            className="form-control"
-            type="text"
-            name="lastName"
-            value={this.state.lastName}
-            onChange={this.onChangeHandle}
-          />
-        </div>
-        <div className="form-group">
-          <label>Gender</label>
-          <select
-            className="form-control"
-            name="gender"
-            value={this.state.gender}
-            onChange={this.onChangeHandle}
-          >
-            <option value="">Please Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Others">Others</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label className="checkbox-lg">
-            Over 18?{" "}
-            <input
-              type="checkbox"
-              id="over18"
-              name="over18"
-              checked={this.state.over18}
-              onChange={this.onChangeHandle}
-            />
-          </label>
-        </div>
-        <button className="btn btn-primary btn-block" onClick={this.formSubmit}>
-          {" "}
-          Submit{" "}
-        </button>
-        <br />
-        <br />
-        <br />
-
-        <ProfileTableList
-          profiles={this.state.profiles}
-          deleteRecord={this.deleteRecord}
-          updateRecord={this.updateRecord}
-        />
-      </div>
-    );
-  }
 }
