@@ -1,13 +1,7 @@
 
+## How to run
 
-## HOW TO Run
-
-
-```
-
-## Run in Docker
-
-> git clone https://github.com/Pratz1994/MotionDesignTest
+> git clone https://github.com/Pratz1994/MotionDesignTest.git
 > cd ReactJsProfileStarter
 > npm install
 > npm start
