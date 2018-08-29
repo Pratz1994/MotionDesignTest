@@ -4,7 +4,7 @@
 ## How to run
 
 > git clone https://github.com/Pratz1994/MotionDesignTest.git
-> cd ReactJsProfileStarter
+> cd MotionDesignTest
 > npm install
 > npm start
 
